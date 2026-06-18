@@ -1,33 +1,92 @@
 
-import { useState, useTransition } from "react";
-function App(){ 
-   
-  const[pending, startTransition]=useTransition();
-  const timeSet=()=>{
+//  import Home from './Home.jsx';
+//  import About from './About.jsx';
 
-    startTransition(async()=>{
-      await new Promise(res=>setTimeout(res,4000));
-    })
-  }
+// import { Route, Routes, Link } from "react-router";
 
-  // const[pending,setPending]=useState(false);   //useState for Transition Hook
-  // const timeSet=async()=>{
-  //   setPending(true);
-  //    await new Promise(res=>setTimeout(res,5000));
-  //     console.log('done');
+// function App(){
+//   return(
+//     <>
 
-  //   setPending(false)
-  // }
-  return(
-    <div>
-      <h1>useTransition Hook in React js </h1>
-      {
-        pending?
-      <img  style={{width:'200px'}} src="https://cdn.pixabay.com/animation/2025/11/11/02/19/02-19-36-889_512.gif" alt="human-error" />:null
-      }
-       <br />
-      <button disabled={pending} onClick={timeSet}>ClickMe</button>
-    </div>
+//     <Link to="/">Home </Link><br />
+//     <Link to="/about">About </Link>
+
+//     <Routes>
+//       <Route path="/" element={<Home/>} />
+//       <Route path="/about" element={<About/>} />
+//     </Routes>
+//     </>
+//   )
+// }
+// export default App;
+
+
+
+
+
+
+
+
+//uses Router 
+
+import { Link, Route, Routes } from 'react-router';
+import Home from './Home';
+import About from './About';
+import College from './College';
+import Login from './Login';
+import NavBar from './NavBar';
+import PageNotFound from './PageNotFound';
+import Student from './Student';
+import Department from './Department';
+import Details from './Details';
+import User from './User';
+import UserDetails from './UserDetails';
+import UserList from './UserList';
+
+
+function App() {
+  return (
+    <>
+      {/* <NavBar/> */}
+
+      <Routes>
+
+        <Route element={<NavBar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/User" element={<User />} />
+          <Route path='/User/List?' element={<UserList />} />
+
+          {/* <Route path="/User/:id" element={<UserDetails/>} /> */}
+          <Route path="/User/:id/:name?" element={<UserDetails />} />
+
+          <Route path='in'>
+            <Route path='/in/user'>
+              <Route path="/in/user/Login" element={<Login />} />
+              <Route path="/in/user/About" element={<About />} />
+            </Route>
+          </Route>
+
+        </Route>
+
+
+
+
+        <Route path="/College" element={<College />}>
+          <Route index element={<Student />} />
+          <Route path="Department" element={<Department />} />
+          <Route path="Details" element={<Details />} />
+        </Route>
+
+        <Route path='/*' element={<PageNotFound />} />
+
+        {/* <Route path='/*' element={<Home/>}/> */}
+        {/* <Route path='/*' element={<Login />} /> */}
+
+
+        {/* <Route path="/*" element={<Navigate to="/Login" />} />   any error this link  */}
+
+      </Routes>
+    </>
   )
 }
 export default App;
