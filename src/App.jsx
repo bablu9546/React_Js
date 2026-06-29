@@ -1,24 +1,49 @@
 
-//  import Home from './Home.jsx';
-//  import About from './About.jsx';
 
-// import { Route, Routes, Link } from "react-router";
+// import { useEffect,useState } from "react";
 
-// function App(){
-//   return(
-//     <>
 
-//     <Link to="/">Home </Link><br />
-//     <Link to="/about">About </Link>
+// export default function App(){
+//     const[userData,setUserData]=useState("");
 
-//     <Routes>
-//       <Route path="/" element={<Home/>} />
-//       <Route path="/about" element={<About/>} />
-//     </Routes>
-//     </>
-//   )
+//     useEffect(()=>{
+//         getUsersData();
+//     },[]);
+
+//     async function getUsersData(){
+//       const url="https://dummyjson.com/users";
+//       let response=await fetch(url);
+//       response= await response.json();
+//       //console.log(response);
+//       setUserData(response.users);
+//     }
+//     console.log(userData);
+//     return(
+//         <div>
+//             <h1>Fetch API Data</h1>
+//             <ul className="user-list">
+//                <li>First Name</li>
+//                <li>Last Name</li>
+//                <li>Age</li>
+
+//             </ul>
+
+
+//             {
+//               userData &&  userData.map((user,index)=>(
+//                     //  <h2 key={index}>{user.firstName}</h2> 
+
+//                     <ul className="user-list">
+//                         <li>{user.firstName}</li>
+//                         <li>{user.lastName}</li>
+//                         <li>{user.age}</li>
+//                     </ul>
+//                 )) 
+//             }
+//         </div>
+//     )
+
 // }
-// export default App;
 
 
 
@@ -27,66 +52,39 @@
 
 
 
-//uses Router 
 
-import { Link, Route, Routes } from 'react-router';
-import Home from './Home';
-import About from './About';
-import College from './College';
-import Login from './Login';
-import NavBar from './NavBar';
-import PageNotFound from './PageNotFound';
-import Student from './Student';
-import Department from './Department';
-import Details from './Details';
-import User from './User';
-import UserDetails from './UserDetails';
+// Navigations, Links aur Hooks ke liye:
+import {BrowserRouter,Routes, Route, Link, useNavigate, useLocation, NavLink } from 'react-router-dom'
+import "./App.css";
 import UserList from './UserList';
+import UserAdd from './UserAdd';
+import UserEdit from './UserEdit';
 
+function App(){
+    return(
+   <div>
+    
+  <ul style={{display: 'flex', gap:'2px'}}>
+    <li style={{gap:'4px'}} >
+        <NavLink to="/">List</NavLink>
+    </li>
 
-function App() {
-  return (
-    <>
-      {/* <NavBar/> */}
+     <li style={{gap:'4px'}}>
+        <NavLink to="/add">AddUser</NavLink>
+    </li>
+    
+  </ul>
 
-      <Routes>
+    {/* <h1> Make Routes and pages for Add user and User List UI  </h1> */}
+    {/* <UserList/> */}
 
-        <Route element={<NavBar />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/User" element={<User />} />
-          <Route path='/User/List?' element={<UserList />} />
+    <Routes>
+      <Route path="/" element={<UserList/>} />
+      <Route path="/add" element={<UserAdd/>} />
+      <Route path="/edit/:id" element={<UserEdit/>} />
+    </Routes>
 
-          {/* <Route path="/User/:id" element={<UserDetails/>} /> */}
-          <Route path="/User/:id/:name?" element={<UserDetails />} />
-
-          <Route path='in'>
-            <Route path='/in/user'>
-              <Route path="/in/user/Login" element={<Login />} />
-              <Route path="/in/user/About" element={<About />} />
-            </Route>
-          </Route>
-
-        </Route>
-
-
-
-
-        <Route path="/College" element={<College />}>
-          <Route index element={<Student />} />
-          <Route path="Department" element={<Department />} />
-          <Route path="Details" element={<Details />} />
-        </Route>
-
-        <Route path='/*' element={<PageNotFound />} />
-
-        {/* <Route path='/*' element={<Home/>}/> */}
-        {/* <Route path='/*' element={<Login />} /> */}
-
-
-        {/* <Route path="/*" element={<Navigate to="/Login" />} />   any error this link  */}
-
-      </Routes>
-    </>
-  )
+   </div>
+    )
 }
 export default App;

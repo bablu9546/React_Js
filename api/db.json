@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Bablu",
+      "age": 22,
+      "email": "bk@gmail.com"
+    },
+    {
+      "id": "2",
+      "name": "mejal",
+      "age": 20,
+      "email": "mk@gmail.com"
+    },
+    {
+      "Id": "8",
+      "name": "suman",
+      "age": 21,
+      "email": "sumanKuikel@gmail.com",
+      "id": "3"
+    },
+    {
+      "name": "mejal",
+      "age": "555",
+      "email": "ghgh",
+      "id": "OWBtVdVeqfQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
