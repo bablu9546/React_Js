@@ -1,0 +1,45 @@
+import "./App.css";
+import { useState } from "react";
+
+export default function App() {
+  //const [name, setName] = useState('');
+  //const [password, setPassword] = useState('');
+  const [nameErr, setNameErr] = useState();
+  const [passErr, setPassErr] = useState();
+
+
+  const handleName = (event) => {
+    console.log(event.target.value);
+    if (event.target.value.length > 5) {
+      setNameErr("please enter valid a userName: only 5 characters are allowed");
+    } else {
+      setNameErr();
+    }
+  }
+
+
+  const handlePassword = (event) => {
+    let regex = /^[A-Z0-9]+$/i;
+    console.log(event.target.value);
+    if (regex.test(event.target.value)) {
+      setPassErr()
+    }
+    else {
+      setPassErr("enter valid password and numbers and alphabet are allowed");
+    }
+  }
+
+
+  return (
+
+    <div style={{ textAlign: 'center', marginTop: '200px', borderBlockEnd: 'none' }}>
+
+      <input className={nameErr ? 'error' : ' '} type="text" placeholder="Enter the name" onChange={handleName} required /> <span className="red-color">{nameErr && nameErr}</span>   <br /><br />
+
+
+      <input type="text" className={passErr ? 'error' : ' '} placeholder="Enter the password" onChange={handlePassword} required /> <span className="red-color">{passErr && passErr}</span>  <br /><br />
+
+      <button disabled={nameErr || passErr} >Login</button>
+    </div>
+  )
+}
