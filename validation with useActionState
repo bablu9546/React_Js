@@ -1,0 +1,48 @@
+import { useActionState } from "react";
+
+function App() {
+
+    const handleLogin = (prevData, formData) => {
+        //console.log("called");
+        let name = formData.get('name');
+        let password = formData.get('password');
+        let regex = /^[A-Z0-9]+$/i;
+
+
+        if (!name || name.length > 5) {
+            return { error: 'Name can not be container more than 5 characters',name,password }
+        } else if (!regex.test(password)) {
+            return { error: 'Password can container only numbers and alphabet',name,password}
+        } else {
+        return {message: 'Login done',name,password}
+        }
+
+
+        // console.log(name,password);
+    }
+
+    const [data, action, pending] = useActionState(handleLogin);
+    console.log(data);
+
+    return (
+        <div>
+            <h1>Validation with useStateAction in React</h1>
+            {
+              data?.message && <span>{data?.message}</span>
+            }
+
+            {
+              data?.error && <span>{data?.error}</span>
+            }
+
+            <form action={action}>
+                <input defaultValue={data?.name} type="text" name='name' placeholder="Enter the user name" />
+                <br /><br />
+                <input defaultValue={data?.password} type="password" name='password' placeholder="Enter the user name" />
+                <br /><br />
+                <button >Login</button>
+            </form>
+        </div>
+    )
+}
+export default App;
